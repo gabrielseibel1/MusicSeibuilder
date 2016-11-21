@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI">
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="line">
+      <color color="-16777216"/>
+    </border>
+    <children>
+      <toolbar id="6649a">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="20"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="b6e0d" class="javax.swing.JButton" binding="buttonArqText">
+            <constraints/>
+            <properties>
+              <text value="Inserir Arquivo Texto"/>
+            </properties>
+          </component>
+          <component id="15c0e" class="javax.swing.JButton" binding="buttonExport">
+            <constraints/>
+            <properties>
+              <text value="Exportar para MIDI"/>
+            </properties>
+          </component>
+          <component id="cc1d2" class="javax.swing.JButton" binding="buttonHelp">
+            <constraints/>
+            <properties>
+              <text value="Ajuda"/>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+      <vspacer id="7f793">
+        <constraints>
+          <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="a9ffd" class="javax.swing.JTextPane" binding="userInput">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="500" height="500"/>
+            <maximum-size width="500" height="500"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="dbd3b" class="javax.swing.JButton" binding="buttonPlay">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Reproduzir"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
