@@ -10,7 +10,7 @@ public class Sound {
     private int volume;
 
     Sound(){
-        this.setInstrument(Instrument.GUITAR);
+        this.setInstrument(new Instrument(Instrument.HARPSICHORD));
         this.setNote('R');
         this.setBpm(120);
         this.resetOctave();
@@ -46,7 +46,7 @@ public class Sound {
     }
 
     public void setBpm(int bpm) {
-        if(bpm>0)
+        if(bpm > 0)
             this.bpm = bpm;
         else
             this.bpm = 60;
@@ -57,7 +57,7 @@ public class Sound {
     }
 
     public void setOctave(int octave) {
-        if(octave>0)
+        if(octave > 0)
             this.octave = octave;
         else
             this.octave = 1;
@@ -68,19 +68,17 @@ public class Sound {
     }
 
     public void setVolume(int volume) {
-        if(volume>=0)
+        if(volume > 100) {
+            this.volume = 100;
+            return;
+        }
+
+        if(volume >= 0)
             this.volume = volume;
         else
             this.volume = 0;
     }
 
-    public void changeInstrument(){
-        switch(this.instrument){
-            case GUITAR: this.setInstrument(Instrument.BASS); break;
-            case BASS:   this.setInstrument(Instrument.PIANO); break;
-            case PIANO:  this.setInstrument(Instrument.GUITAR); break;
-        }
-    }
 
     public void decBpm(){
         this.setBpm(this.getBpm()-50); //decreases bpm in 50

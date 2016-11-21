@@ -2,7 +2,7 @@
  * Created by Pc on 10/10/2016.
  */
 public enum Instrument {
-    GUITAR("Guitar"),BASS("Acoustic_Bass"), PIANO("Piano");
+    GUITAR("Guitar"),BASS("Bass"), PIANO("Piano");
 
     private String name;
     private Instrument(String name){
@@ -16,7 +16,5 @@ public enum Instrument {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
 }
 

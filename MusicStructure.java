@@ -4,6 +4,7 @@ import java.util.List;
 /**
  * Created by Pc on 10/10/2016.
  */
+
 public class MusicStructure {
     private LinkedList<Sound> sounds;
     MusicStructure(){
@@ -22,12 +23,16 @@ public class MusicStructure {
     public Sound[] toSoundArray(){
         return (Sound[]) this.sounds.toArray();
     };
+    public LinkedList<Sound> getSounds(){
+        return sounds;
+    }
     public Sound popSound(){
         return this.sounds.remove(0);
     };
     public Sound getFirstSound(){
-        return this.sounds.get(0);
+        return this.sounds.getFirst();
     }
+    public Sound getLastSound() {return this.sounds.getLast();}
     public void clearSounds(){
         this.sounds.clear();
     }
