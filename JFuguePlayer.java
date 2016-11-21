@@ -26,9 +26,9 @@ public class JFuguePlayer {
     private ArrayList<Note> notes;
 
     /**
-     * @var ArrayList<String> Lista de instrumentos para trocar durante o player
+     * @var ArrayList<Integer> Lista de instrumentos para trocar durante o player
      */
-    private ArrayList<int> instruments;
+    private ArrayList<Integer> instruments;
 
     /**
      * @var int Um minuto em milissegundos
@@ -41,13 +41,13 @@ public class JFuguePlayer {
     JFuguePlayer() {
         setMusicStructure(new MusicStructure());
         notes = new ArrayList<Note>();
-        instruments = new ArrayList<int>();
+        instruments = new ArrayList<Integer>();
     }
 
     JFuguePlayer(MusicStructure music_structure) {
         setMusicStructure(music_structure);
         notes = new ArrayList<Note>();
-        instruments = new ArrayList<int>();
+        instruments = new ArrayList<Integer>();
     }
 
     /**

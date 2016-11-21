@@ -66,7 +66,7 @@ public class MidiExporter {
             //Concatena as partes para ficar inteligível para o JFugue
             String my_note = "X[Volume]=".concat(Integer.toString(sound.getVolume())).concat(" ").concat(Character.toString(sound.getNote())).concat(Integer.toString(sound.getOctave()));
             pattern.add(my_note);
-            pattern.setInstrument(sound.getInstrument().getName());
+            pattern.setInstrument(sound.getInstrument().getMidiValue());
             pattern.setTempo(sound.getBpm());
         }
         this.pattern = pattern;
