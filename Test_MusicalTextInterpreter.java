@@ -5,7 +5,7 @@
 
 public class Test_MusicalTextInterpreter {
     public static void main(String[] args){
-        MusicalTextInterpreter interpreter = new MusicalTextInterpreter("abcdefghijklmnopqrstuvwxyz !0246813579?.\n;,*");
+        MusicalTextInterpreterOld interpreter = new MusicalTextInterpreterOld("abcdefghijklmnopqrstuvwxyz !0246813579?.\n;,*");
         interpreter.interpretate();
         System.out.println(interpreter.toString());
 
