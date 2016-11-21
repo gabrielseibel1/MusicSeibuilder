@@ -65,6 +65,7 @@ public class JFuguePlayer {
                 player.startNote(note);
                 player.changeInstrument(instruments.remove(0)); //Pega o instrumento a ser trocado
                 waitForDuration(note); //Espera duração de nota para tocar outra nota
+                player.stopNote(note);
             }
             player.close();
         }
