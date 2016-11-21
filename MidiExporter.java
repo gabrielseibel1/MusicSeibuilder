@@ -44,12 +44,12 @@ public class MidiExporter {
      * Função principal para começar a tocar a música do MusicStructure
      * @throws Exception
      */
-    public void export(String name) {
+    static public void export(String name) {
         //Configura as notas, separando os sounds da MusicStructure em um array de Notes
         configurePattern();
         try {
-            System.out.println(pattern);
-            MidiFileManager.savePatternToMidi(pattern, new File(name.concat(".mid")));
+            System.out.println(this.pattern);
+            MidiFileManager.savePatternToMidi(this.pattern, new File(name.concat(".mid")));
         }
         catch(Exception e) {
             System.out.println("erro: " + e);
