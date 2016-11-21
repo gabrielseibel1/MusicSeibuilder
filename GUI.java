@@ -1,4 +1,7 @@
+import sun.rmi.runtime.Log;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,30 +17,49 @@ public class GUI {
     private JButton buttonExport;
     private JButton buttonHelp;
     private JButton buttonPlay;
-    private JTextPane userInput;
+    private JEditorPane userInput;
 
     public GUI() {
         buttonPlay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                MusicStructure musicStructure = getMusicStructure();
+                JFuguePlayer player = new JFuguePlayer(musicStructure);
+                player.play();
             }
         });
         buttonArqText.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().open(new File("c:\\"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                String fileText;
 
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showOpenDialog(rootPanel);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = chooser.getSelectedFile();
+                    String fileName = selectedFile.getAbsolutePath();
+                    fileText = TextFileManager.readFromTextFile(fileName);
+                    userInput.setText(fileText);
+                }
             }
         });
         buttonExport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String filePath;
 
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
+                chooser.setFileFilter(filter);
+                int returnVal = chooser.showSaveDialog(rootPanel);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    filePath = chooser.getSelectedFile().getPath();
+                    MusicStructure musicStructure = getMusicStructure();
+                    MidiExporter midiExporter = new MidiExporter(musicStructure);
+                    midiExporter.export(filePath);
+                }
             }
         });
         buttonHelp.addActionListener(new ActionListener() {
@@ -46,6 +68,12 @@ public class GUI {
 
             }
         });
+    }
+
+    private MusicStructure getMusicStructure() {
+        String textInput = userInput.getText();
+        MusicalTextInterpreter interpreter = new MusicalTextInterpreter(textInput);
+        return interpreter.interpretate();
     }
 
     public static void main(String[] args) {

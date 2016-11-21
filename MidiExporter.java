@@ -44,7 +44,7 @@ public class MidiExporter {
      * Função principal para começar a tocar a música do MusicStructure
      * @throws Exception
      */
-    static public void export(String name) {
+    public void export(String name) {
         //Configura as notas, separando os sounds da MusicStructure em um array de Notes
         configurePattern();
         try {

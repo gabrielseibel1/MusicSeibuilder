@@ -13,23 +13,10 @@ import java.util.List;
 public class TextFileManager {
 
 
+    public static void stringToEditTextPane(String text){
 
 
-
-
-
-    /*
-    public static String pickFile(){
-        String filePath;
-        JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
-        chooser.setFileFilter(filter);
-        int returnVal = chooser.showOpenDialog(comp);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-            filePath = chooser.getSelectedFile().getAbsolutePath();
-        return filePath;
     }
-    */
 
     public static String readFromTextFile(String filename){
         List<String> fileText = new ArrayList<String>();
