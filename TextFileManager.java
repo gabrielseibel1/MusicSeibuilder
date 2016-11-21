@@ -12,7 +12,26 @@ import java.util.List;
  */
 public class TextFileManager {
 
-    private List<String> readFromTextFile(String filename){
+
+
+
+
+
+
+    /*
+    public static String pickFile(){
+        String filePath;
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(comp);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            filePath = chooser.getSelectedFile().getAbsolutePath();
+        return filePath;
+    }
+    */
+
+    public static String readFromTextFile(String filename){
         List<String> fileText = new ArrayList<String>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -21,11 +40,13 @@ public class TextFileManager {
                 fileText.add(line);
             }
             reader.close();
-            return fileText;
+            return fileText.toString();
         }
         catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
+
 }
