@@ -15,27 +15,27 @@ import java.util.ArrayList;
  * Classe que trata a forma de tocar a MusicStructure com o JFugue
  */
 public class JFuguePlayer {
-    /*
+    /**
      * @var MusicStructure Estrutura da música a ser tocada
      */
     private MusicStructure music_structure;
 
-    /*
+    /**
      * @var ArrayList<Note> Lista de notas a serem tocadas pelo RealtimePlayer do JFugue
      */
     private ArrayList<Note> notes;
 
-    /*
+    /**
      * @var ArrayList<String> Lista de instrumentos para trocar durante o player
      */
     private ArrayList<String> instruments;
 
-    /*
+    /**
      * @var int Um minuto em milissegundos
      */
     private static final int UM_MINUTO = 60000;
 
-    /*
+    /**
      * Construtor da classe. Seta os atributos iniciais da classe.
      */
     JFuguePlayer() {
@@ -50,7 +50,7 @@ public class JFuguePlayer {
         instruments = new ArrayList<String>();
     }
 
-    /*
+    /**
      * Função principal para começar a tocar a música do MusicStructure
      * @throws Exception
      */
@@ -74,7 +74,7 @@ public class JFuguePlayer {
 
     }
 
-    /*
+    /**
      * Método para dar um sleep com o tempo (BPM) das notas
      * @param Note nota a ser definido o tempo de duração para Sleep
      * @throws Exception
@@ -90,7 +90,7 @@ public class JFuguePlayer {
         }
     }
 
-    /*
+    /**
      * Método que converte a MusicStructure para um array de Notes e Instruments, reconhecido pelo JFugue
      */
     public void configureNotes() {
@@ -105,14 +105,14 @@ public class JFuguePlayer {
         }
     }
 
-    /*
+    /**
      * @param MusicStructure Estrutura da música a ser setada
      */
     public void setMusicStructure(MusicStructure music_structure) {
         this.music_structure = music_structure;
     }
 
-    /*
+    /**
      * @return MusicStructure Estrutura da música
      */
     public MusicStructure getMusicStructure() {
