@@ -62,8 +62,8 @@ public class JFuguePlayer {
             //Retira nota por nota do array, até ele ficar vazio
             while(!notes.isEmpty()) {
                 Note note = notes.remove(0); //Pega a pr[oxima nota a ser tocada
-                player.startNote(note);
                 player.changeInstrument(instruments.remove(0)); //Pega o instrumento a ser trocado
+                player.startNote(note);
                 waitForDuration(note); //Espera duração de nota para tocar outra nota
                 player.stopNote(note);
             }

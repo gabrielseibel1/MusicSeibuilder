@@ -58,6 +58,7 @@ public class MusicalTextInterpreter {
             currentChar = text.charAt(textPosition);
             InterpretedChar currentInterpretation = new InterpretedChar(currentChar, lastChar);
             currentInterpretation.applyChangeTo(interpretedMusic);
+            lastChar = currentChar;
         }
 
         return interpretedMusic;
@@ -113,6 +114,7 @@ public class MusicalTextInterpreter {
                     musicStructure.addSound(repeatedSound);
                 }else{
                     Sound pause = new Sound();
+                    pause = musicStructure.getLastSound();
                     pause.setNote('R');
                     musicStructure.addSound(pause);
                 }

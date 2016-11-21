@@ -13,11 +13,6 @@ import java.util.List;
 public class TextFileManager {
 
 
-    public static void stringToEditTextPane(String text){
-
-
-    }
-
     public static String readFromTextFile(String filename){
         List<String> fileText = new ArrayList<String>();
         try {
