@@ -114,6 +114,7 @@ public class MusicalTextInterpreter {
                 }else{
                     Sound pause = new Sound();
                     pause.setNote('R');
+                    musicStructure.addSound(pause);
                 }
             }
         }
