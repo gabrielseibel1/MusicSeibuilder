@@ -2,7 +2,7 @@
  * Created by Pc on 10/10/2016.
  */
 public enum Instrument {
-    GUITAR("Guitar"),BASS("Bass"), PIANO("Piano");
+    GUITAR("Guitar"),BASS("Acoustic_Bass"), PIANO("Piano");
 
     private String name;
     private Instrument(String name){

@@ -49,7 +49,7 @@ public class Sound {
         if(bpm>0)
             this.bpm = bpm;
         else
-            this.bpm = 1;
+            this.bpm = 60;
     }
 
     public int getOctave() {

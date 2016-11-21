@@ -10,15 +10,18 @@ public class Test_MusicStructure {
             System.out.println(musicStructure.toString());
 
             Sound dummySound = new Sound(sound);
+            sound.setNote('C');
             musicStructure.addSound(dummySound);
             sound.decOctave();
         }
-        System.out.println("\n\n*-*-* Sounds Poppage *-*-* ");
+        JFuguePlayer player = new JFuguePlayer(musicStructure);
+        player.play();
+        /*System.out.println("\n\n*-*-* Sounds Poppage *-*-* ");
         for(int i=0;i<7;i++){
             sound = musicStructure.popSound();
             System.out.println("\n[Popped "+sound.toString()+"]");
             System.out.println(musicStructure.toString());
-        }
+        }*/
     }
 
 }
