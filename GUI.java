@@ -73,7 +73,7 @@ public class GUI {
     private MusicStructure getMusicStructure() {
         String textInput = userInput.getText();
         MusicalTextInterpreter interpreter = new MusicalTextInterpreter(textInput);
-        return interpreter.interpretate();
+        return interpreter.interpret();
     }
 
     public static void main(String[] args) {
