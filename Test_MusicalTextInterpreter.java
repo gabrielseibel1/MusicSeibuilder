@@ -5,13 +5,9 @@
 
 public class Test_MusicalTextInterpreter {
     public static void main(String[] args){
-        MusicalTextInterpreter interpreter = new MusicalTextInterpreter("!FABFAB\nFABFAB");
+        MusicalTextInterpreter interpreter = new MusicalTextInterpreter("abcdefghijklmnopqrstuvwxyz !0246813579?.\n;,*");
         interpreter.interpretate();
         System.out.println(interpreter.toString());
-        MidiExporter midi = new MidiExporter(interpreter.getMusic());
-        midi.export("arthur");
-        //JFuguePlayer player = new JFuguePlayer(interpreter.getMusic());
-        //player.play();
 
         //abcdefghijklmnopqrstuvwxyz !0246813579?.\n;,*
     }
