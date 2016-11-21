@@ -48,7 +48,6 @@ public class MidiExporter {
         //Configura as notas, separando os sounds da MusicStructure em um array de Notes
         configurePattern();
         try {
-            System.out.println(this.pattern);
             MidiFileManager.savePatternToMidi(this.pattern, new File(name.concat(".mid")));
         }
         catch(Exception e) {
