@@ -2,69 +2,60 @@
  * Created by Arthu on 21/11/2016.
  */
 
-import org.jfugue.player.Player;
 import org.jfugue.realtime.RealtimePlayer;
-import org.jfugue.rhythm.Rhythm;
-import org.jfugue.pattern.Pattern;
 import org.jfugue.theory.Note;
-import org.jfugue.theory.ChordProgression;
 
 import java.util.ArrayList;
 
 /**
- * Classe que trata a forma de tocar a MusicStructure com o JFugue
+ * Class that describes the way to play a MusicStructure using JFugue
  */
 public class JFuguePlayer {
-    /**
-     * @var MusicStructure Estrutura da música a ser tocada
-     */
-    private MusicStructure music_structure;
+
+    private MusicStructure musicToBePlayed;
 
     /**
-     * @var ArrayList<Note> Lista de notas a serem tocadas pelo RealtimePlayer do JFugue
+     * @var ArrayList<Note> List of musical notes to be played by Jfugue's RealTimePlayer
      */
     private ArrayList<Note> notes;
 
     /**
-     * @var ArrayList<Integer> Lista de instrumentos para trocar durante o player
+     * @var ArrayList<Integer> List of instruments that play the song's notes
      */
     private ArrayList<Integer> instruments;
 
     /**
-     * @var int Um minuto em milissegundos
+     * @var int One minute in milliseconds
      */
-    private static final int UM_MINUTO = 60000;
+    private static final int ONE_MINUTE = 60000;
 
-    /**
-     * Construtor da classe. Seta os atributos iniciais da classe.
-     */
     JFuguePlayer() {
         setMusicStructure(new MusicStructure());
         notes = new ArrayList<Note>();
         instruments = new ArrayList<Integer>();
     }
 
-    JFuguePlayer(MusicStructure music_structure) {
-        setMusicStructure(music_structure);
+    JFuguePlayer(MusicStructure musicToBePlayed) {
+        setMusicStructure(musicToBePlayed);
         notes = new ArrayList<Note>();
         instruments = new ArrayList<Integer>();
     }
 
     /**
-     * Função principal para começar a tocar a música do MusicStructure
+     * Main function to start playing the song from the MusicStructure
      * @throws Exception
      */
     public void play() {
-        //Configura as notas, separando os sounds da MusicStructure em um array de Notes
+        //converts the MusicStructure to a Notes Array and an Instruments Array
         configureNotes();
         try {
             RealtimePlayer player = new RealtimePlayer();
-            //Retira nota por nota do array, até ele ficar vazio
+            //Takes off the notes of the array one by one, until it's empty
             while(!notes.isEmpty()) {
-                Note note = notes.remove(0); //Pega a pr[oxima nota a ser tocada
-                player.changeInstrument(instruments.remove(0)); //Pega o instrumento a ser trocado
+                Note note = notes.remove(0); //get's the next note to be played
+                player.changeInstrument(instruments.remove(0)); //get's the instument to execute the note
                 player.startNote(note);
-                waitForDuration(note); //Espera duração de nota para tocar outra nota
+                waitForDuration(note); //Wait for the notes's duration to start playing another one
                 player.stopNote(note);
             }
             player.close();
@@ -76,15 +67,15 @@ public class JFuguePlayer {
     }
 
     /**
-     * Método para dar um sleep com o tempo (BPM) das notas
-     * @param Note nota a ser definido o tempo de duração para Sleep
+     * Method to sleep(wait) for the time of each note - based on the BPM
+     * @param note the note on which the Sleep Time is based
      * @throws Exception
      */
     public void waitForDuration(Note note) {
         try {
             Double d = new Double(note.getDuration());
             int bpm = d.intValue();
-            Thread.sleep(UM_MINUTO/bpm);
+            Thread.sleep(ONE_MINUTE /bpm);
         }
         catch(Exception e) {
             System.out.println("erro: " + e);
@@ -92,31 +83,31 @@ public class JFuguePlayer {
     }
 
     /**
-     * Método que converte a MusicStructure para um array de Notes e Instruments, reconhecido pelo JFugue
+     * Method that converts the MusicStructure to a Notes Array and an Instruments Array, recognizable by JFugue
      */
     public void configureNotes() {
         while(getMusicStructure().exists()) {
-            Sound sound = getMusicStructure().popSound(); //Retira o primeiro sound
-            //Concatena as partes para ficar inteligível para o JFugue
+            Sound sound = getMusicStructure().popSound(); //Gets the first Sound out of the structure
+            //Concatenates the parts to be intelligible by Jfugue
             String my_note = Character.toString(sound.getNote()).concat(Integer.toString(sound.getOctave())).concat("a").concat(Integer.toString(sound.getVolume()));
             Note note = new Note(my_note);
             note.setDuration(sound.getBpm());
-            notes.add(note); //Adiciona a nota no array de Notes
-            instruments.add(sound.getInstrument().getMidiValue()); //Adiciona o instrumento no array de Instruments
+            notes.add(note); //adds the note to the notes array
+            instruments.add(sound.getInstrument().getMidiValue()); //adds the instrument to the instrument array
         }
     }
 
     /**
-     * @param MusicStructure Estrutura da música a ser setada
+     * @param musicToBePlayed structure of the song to be set up
      */
-    public void setMusicStructure(MusicStructure music_structure) {
-        this.music_structure = music_structure;
+    public void setMusicStructure(MusicStructure musicToBePlayed) {
+        this.musicToBePlayed = musicToBePlayed;
     }
 
     /**
-     * @return MusicStructure Estrutura da música
+     * @return MusicStructure the structure of the song
      */
     public MusicStructure getMusicStructure() {
-        return this.music_structure;
+        return this.musicToBePlayed;
     }
 }

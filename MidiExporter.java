@@ -2,53 +2,46 @@
  * Created by Arthu on 21/11/2016.
  */
 
-import org.jfugue.player.Player;
-import org.jfugue.realtime.RealtimePlayer;
-import org.jfugue.rhythm.Rhythm;
 import org.jfugue.pattern.Pattern;
-import org.jfugue.theory.Note;
 import org.jfugue.midi.MidiFileManager;
-import org.jfugue.theory.ChordProgression;
+
 import java.io.File;
 
-import java.util.ArrayList;
-
 /**
- * Classe que trata a forma de exportar a música para Midi File
+ * Class that works on exporting music to a .mid (MIDI) file
  */
 public class MidiExporter {
-    /**
-     * @var MusicStructure Estrutura da música a ser tocada
-     */
-    private MusicStructure music_structure;
+
 
     /**
-     * @var Pattern padrão a ser exportado
+     * @var MusicStructure the structure of the song to be saved as .mid (MIDI)
      */
-    private Pattern pattern;
+    private MusicStructure musicToBeExported;
 
     /**
-     * Construtor da classe. Seta os atributos iniciais da classe.
+     * @var Pattern Jfugue uses a Pattern type to export a song to .mid (MIDI)
      */
+    private Pattern patternToExport;
+
     MidiExporter() {
         setMusicStructure(new MusicStructure());
-        pattern = new Pattern();
+        patternToExport = new Pattern();
     }
 
-    MidiExporter(MusicStructure music_structure) {
-        setMusicStructure(music_structure);
-        pattern = new Pattern();
+    MidiExporter(MusicStructure musicToBeExported) {
+        setMusicStructure(musicToBeExported);
+        patternToExport = new Pattern();
     }
 
     /**
-     * Função principal para começar a tocar a música do MusicStructure
+     * Main function to start playing music from the MusicStructure
      * @throws Exception
      */
     public void export(String name) {
-        //Configura as notas, separando os sounds da MusicStructure em um array de Notes
+        //Converts MusicStructure to a Pattern
         configurePattern();
         try {
-            MidiFileManager.savePatternToMidi(this.pattern, new File(name.concat(".mid")));
+            MidiFileManager.savePatternToMidi(this.patternToExport, new File(name.concat(".mid")));
         }
         catch(Exception e) {
             System.out.println("erro: " + e);
@@ -56,32 +49,32 @@ public class MidiExporter {
     }
 
     /**
-     * Método que converte a MusicStructure para um array de Notes e Instruments, reconhecido pelo JFugue
+     * Converts MusicStructure to a Pattern recognizable by JFugue
      */
     public void configurePattern() {
         Pattern pattern = new Pattern();
         while(getMusicStructure().exists()) {
-            Sound sound = getMusicStructure().popSound(); //Retira o primeiro sound
-            //Concatena as partes para ficar inteligível para o JFugue
+            Sound sound = getMusicStructure().popSound(); //Gets the first Sound out of the structure
+            //Concatenates the parts to be intelligible by Jfugue
             String my_note = "X[Volume]=".concat(Integer.toString(sound.getVolume())).concat(" ").concat(Character.toString(sound.getNote())).concat(Integer.toString(sound.getOctave()));
             pattern.add(my_note);
             pattern.setInstrument(sound.getInstrument().getMidiValue());
             pattern.setTempo(sound.getBpm());
         }
-        this.pattern = pattern;
+        this.patternToExport = pattern;
     }
 
     /**
-     * @param MusicStructure Estrutura da música a ser setada
+     * @param musicToBeExported Structure of the song to be set up
      */
-    public void setMusicStructure(MusicStructure music_structure) {
-        this.music_structure = music_structure;
+    public void setMusicStructure(MusicStructure musicToBeExported) {
+        this.musicToBeExported = musicToBeExported;
     }
 
     /**
-     * @return MusicStructure Estrutura da música
+     * @return MusicStructure The song's structure
      */
     public MusicStructure getMusicStructure() {
-        return this.music_structure;
+        return this.musicToBeExported;
     }
 }

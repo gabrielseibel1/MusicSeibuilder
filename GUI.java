@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by gabri on 21/11/2016.
+ * Graphical user interface
  */
 public class GUI {
     private JPanel rootPanel;
