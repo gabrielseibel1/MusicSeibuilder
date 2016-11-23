@@ -43,7 +43,6 @@ public class JFuguePlayer {
 
     /**
      * Main function to start playing the song from the MusicStructure
-     * @throws Exception
      */
     public void play() {
         //converts the MusicStructure to a Notes Array and an Instruments Array
@@ -69,7 +68,6 @@ public class JFuguePlayer {
     /**
      * Method to sleep(wait) for the time of each note - based on the BPM
      * @param note the note on which the Sleep Time is based
-     * @throws Exception
      */
     public void waitForDuration(Note note) {
         try {

@@ -35,7 +35,6 @@ public class MidiExporter {
 
     /**
      * Main function to start playing music from the MusicStructure
-     * @throws Exception
      */
     public void export(String name) {
         //Converts MusicStructure to a Pattern
