@@ -134,8 +134,7 @@ public class MusicalTextInterpreter {
                     Sound repeatedSound = musicStructure.getLastSound();
                     musicStructure.addSound(repeatedSound);
                 }else{
-                    Sound pause;
-                    pause = musicStructure.getLastSound();
+                    Sound pause = new Sound(musicStructure.getLastSound());
                     pause.setNote('R');
                     musicStructure.addSound(pause);
                 }
