@@ -9,7 +9,6 @@ public class MusicalTextInterpreter {
     private static final int maxOctave = 9;
 
 
-
     /**
      * String where input text to be interpreted is stored.
      */
@@ -34,13 +33,16 @@ public class MusicalTextInterpreter {
 
 
     /**
-     * Current instrument read from text.
+     * Current instrument read from text. Sets the Pan Flute as the default instrument.
+     *
      */
     private Instrument currentInstrument = new Instrument(Instrument.PAN_FLUTE);
 
+
+
     /**
      * Creates musical interpreter for converting given text in MusicStructure.
-     * @param text string storing text to be interpreted.
+     * @param text string storing text to be interpreted and converted to a music structure.
      */
     public MusicalTextInterpreter(String text){
         this.setText(text);
@@ -48,9 +50,10 @@ public class MusicalTextInterpreter {
 
 
     /**
-     * Reads text and converts it to MusicStructure.
+     * Reads text stored in text attribute from class and converts it to MusicStructure.
+     * @return returns MusicStructure containing interpretation from given text.
      */
-    public MusicStructure interpret(){
+    MusicStructure interpret(){
         int textLength = text.length();
         char lastChar = 'R';
         char currentChar;
@@ -65,20 +68,38 @@ public class MusicalTextInterpreter {
     }
 
     /**
-     * Super class describing char functionality.
+     * Class describing char functionality.
      */
     private class InterpretedChar {
 
+        /**
+         * Stores char read from text in main class MusicalTextInterpreter
+         */
         private char inputChar;
 
+
+        /**
+         * Stores last char read, before the input char, from text in main class MusicalTextInterpreter
+         */
         private char lastChar;
 
-        public InterpretedChar(char inputChar, char lastChar){
+        /**
+         * Constructs instance of InterpretedChar to be used in MusicalTextInterpreter
+         * @param inputChar currently char read from the text.
+         * @param lastChar char that was read before inputChar. This information is important because the inputChar
+         *                 may have different meanings depending on what was read before.
+         */
+        InterpretedChar(char inputChar, char lastChar){
             this.setInputChar(inputChar);
             this.setLastChar(lastChar);
         }
 
-        public void applyChangeTo(MusicStructure musicStructure){
+        /**
+         * Modifies given MusicStructure and the text interpretation current values according to the chars that were stored in the class attributes
+         * inputChar and lastChar.
+         * @param musicStructure instance of MusicStructure that will be modified.
+         */
+        void applyChangeTo(MusicStructure musicStructure){
             char inputChar = this.getInputChar();
             char lastChar = this.getLastChar();
 
@@ -113,7 +134,7 @@ public class MusicalTextInterpreter {
                     Sound repeatedSound = musicStructure.getLastSound();
                     musicStructure.addSound(repeatedSound);
                 }else{
-                    Sound pause = new Sound();
+                    Sound pause;
                     pause = musicStructure.getLastSound();
                     pause.setNote('R');
                     musicStructure.addSound(pause);
@@ -121,75 +142,106 @@ public class MusicalTextInterpreter {
             }
         }
 
+
+        /**
+         * Checks if char represents a digit.
+         * @param inputChar variable containing char to be said whether is a number or not.
+         * @return returns true if inputChar is a number and false otherwise.
+         */
         private boolean isNumber(char inputChar){
             return inputChar == '0' || inputChar == '1' || inputChar == '2' || inputChar == '3' ||inputChar == '4' || inputChar == '5' ||
                     inputChar == '6' || inputChar == '7' || inputChar == '8' || inputChar == '9';
         }
 
+
+        /**
+         * Checks if char represents a change in instrument, according to the specification.
+         * @param inputChar variable containing char to be said whether is an instrument change or not.
+         * @return returns true if inputChar is an instrument change and false otherwise.
+         */
         private boolean isInstrumentChange(char inputChar){
             return inputChar == '!' || inputChar == '\n' || inputChar == ';' || inputChar == ',' || isNumber(inputChar);
         }
 
+        /**
+         * Checks if char represents a change in volume, according to the specification.
+         * @param inputChar variable containing char to be said whether is a volume change or not.
+         * @return returns true if inputChar is a volume change and false otherwise.
+         */
         private boolean isVolumeChange(char inputChar){
             return inputChar == ' ' || inputChar == 'o' || inputChar == 'O' || inputChar == 'u' || inputChar == 'U' || inputChar == 'i'
                     || inputChar == 'I';
         }
 
+        /**
+         * Checks if char represents a change in octave, according to the specification.
+         * @param inputChar variable containing char to be said whether is an octave change or not.
+         * @return returns true if inputChar is an octave change and false otherwise.
+         */
         private boolean isOctaveChange(char inputChar){
             return inputChar == '?' || inputChar == '.';
         }
 
-
+        /**
+         * Checks if char represents a pure note, according to the specification.
+         * @param inputChar variable containing char to be said whether is a pure note or not.
+         * @return returns true if inputChar is a pure note and false otherwise.
+         */
         private boolean isPureNote(char inputChar){
             return inputChar == 'A' || inputChar == 'B' || inputChar == 'C' || inputChar == 'D' || inputChar == 'E' || inputChar == 'F'
                     || inputChar == 'G';
         }
 
+        /**
+         * Checks if char represents a change in the current values of the text interpretation, according to the specification.
+         * @param inputChar variable containing char to be said whether is a technical change or not.
+         * @return returns true if inputChar is a technical change and false otherwise.
+         */
         private boolean isTechnicalChange(char inputChar) {
             return isInstrumentChange(inputChar)  || isOctaveChange(inputChar) || isVolumeChange(inputChar);
         }
 
-        public char getInputChar() {
+
+        char getInputChar() {
             return inputChar;
         }
 
-        public void setInputChar(char inputChar) {
+        void setInputChar(char inputChar) {
             this.inputChar = inputChar;
         }
 
-        public char getLastChar() {
+        char getLastChar() {
             return lastChar;
         }
 
-        public void setLastChar(char lastChar) {
+        void setLastChar(char lastChar) {
             this.lastChar = lastChar;
         }
     }
 
-    public int getCurrentOctave() {
+    private int getCurrentOctave() {
         return currentOctave;
     }
 
-    public void setCurrentOctave(int currentOctave) {
+    private void setCurrentOctave(int currentOctave) {
         this.currentOctave = currentOctave;
     }
 
-    public int getCurrentVolume() {
+    private int getCurrentVolume() {
         return currentVolume;
     }
 
-    public void setCurrentVolume(int currentVolume) {
+    private void setCurrentVolume(int currentVolume) {
         this.currentVolume = currentVolume;
     }
 
-    public Instrument getCurrentInstrument() {
+    private Instrument getCurrentInstrument() {
         return currentInstrument;
     }
 
-    public void setCurrentInstrument(Instrument currentInstrument) {
+    private void setCurrentInstrument(Instrument currentInstrument) {
         this.currentInstrument = currentInstrument;
     }
-
 
     public String getText() {
         return text;
