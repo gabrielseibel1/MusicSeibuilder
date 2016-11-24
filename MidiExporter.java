@@ -76,4 +76,11 @@ public class MidiExporter {
     public MusicStructure getMusicStructure() {
         return this.musicToBeExported;
     }
+
+    /**
+     * @return Pattern The song's pattern
+     */
+    public Pattern getPattern() {
+        return this.patternToExport;
+    }
 }

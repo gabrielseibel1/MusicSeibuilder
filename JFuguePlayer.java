@@ -17,12 +17,12 @@ public class JFuguePlayer {
     /**
      * @var ArrayList<Note> List of musical notes to be played by Jfugue's RealTimePlayer
      */
-    private ArrayList<Note> notes;
+    private ArrayList<Note> notesToBePlayed;
 
     /**
      * @var ArrayList<Integer> List of instruments that play the song's notes
      */
-    private ArrayList<Integer> instruments;
+    private ArrayList<Integer> instrumentsToBePlayed;
 
     /**
      * @var int One minute in milliseconds
@@ -31,14 +31,14 @@ public class JFuguePlayer {
 
     JFuguePlayer() {
         setMusicStructure(new MusicStructure());
-        notes = new ArrayList<Note>();
-        instruments = new ArrayList<Integer>();
+        notesToBePlayed = new ArrayList<Note>();
+        instrumentsToBePlayed = new ArrayList<Integer>();
     }
 
     JFuguePlayer(MusicStructure musicToBePlayed) {
         setMusicStructure(musicToBePlayed);
-        notes = new ArrayList<Note>();
-        instruments = new ArrayList<Integer>();
+        notesToBePlayed = new ArrayList<Note>();
+        instrumentsToBePlayed = new ArrayList<Integer>();
     }
 
     /**
@@ -50,9 +50,9 @@ public class JFuguePlayer {
         try {
             RealtimePlayer player = new RealtimePlayer();
             //Takes off the notes of the array one by one, until it's empty
-            while(!notes.isEmpty()) {
-                Note note = notes.remove(0); //get's the next note to be played
-                player.changeInstrument(instruments.remove(0)); //get's the instument to execute the note
+            while(!notesToBePlayed.isEmpty()) {
+                Note note = notesToBePlayed.remove(0); //get's the next note to be played
+                player.changeInstrument(instrumentsToBePlayed.remove(0)); //get's the instument to execute the note
                 player.startNote(note);
                 waitForDuration(note); //Wait for the notes's duration to start playing another one
                 player.stopNote(note);
@@ -90,8 +90,8 @@ public class JFuguePlayer {
             String my_note = Character.toString(sound.getNote()).concat(Integer.toString(sound.getOctave())).concat("a").concat(Integer.toString(sound.getVolume()));
             Note note = new Note(my_note);
             note.setDuration(sound.getBpm());
-            notes.add(note); //adds the note to the notes array
-            instruments.add(sound.getInstrument().getMidiValue()); //adds the instrument to the instrument array
+            notesToBePlayed.add(note); //adds the note to the notes array
+            instrumentsToBePlayed.add(sound.getInstrument().getMidiValue()); //adds the instrument to the instrument array
         }
     }
 
@@ -107,5 +107,19 @@ public class JFuguePlayer {
      */
     public MusicStructure getMusicStructure() {
         return this.musicToBePlayed;
+    }
+
+    /**
+     * @return ArrayList<Note> the structure of notes
+     */
+    public ArrayList<Note> getNotes() {
+        return this.notesToBePlayed;
+    }
+
+    /**
+     * @return ArrayList<Integer> the structure of notes
+     */
+    public ArrayList<Integer> getInstruments() {
+        return this.instrumentsToBePlayed;
     }
 }
