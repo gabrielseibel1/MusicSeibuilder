@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by gabri on 21/11/2016.
  */
-public class TextFileManager extends GUI {
+public class TextFileManager {
 
 
     public static String readFromTextFile(String filename){
@@ -29,6 +29,4 @@ public class TextFileManager extends GUI {
             return null;
         }
     }
-
-
 }

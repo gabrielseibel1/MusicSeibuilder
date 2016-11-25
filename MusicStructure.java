@@ -72,7 +72,7 @@ public class MusicStructure {
 
     /**
      * Erases all the sounds of the music structure,
-     * leaving it empty => exists() = false
+     * leaving it empty implies exists() = false
      */
     public void clearSounds(){
         this.sounds.clear();

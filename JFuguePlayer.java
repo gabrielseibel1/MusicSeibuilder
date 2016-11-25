@@ -15,17 +15,17 @@ public class JFuguePlayer {
     private MusicStructure musicToBePlayed;
 
     /**
-     * @var ArrayList<Note> List of musical notes to be played by Jfugue's RealTimePlayer
+     * @var  List of musical notes to be played by Jfugue's RealTimePlayer
      */
     private ArrayList<Note> notesToBePlayed;
 
     /**
-     * @var ArrayList<Integer> List of instruments that play the song's notes
+     * @var  List of instruments that play the song's notes
      */
     private ArrayList<Integer> instrumentsToBePlayed;
 
     /**
-     * @var int One minute in milliseconds
+     * @var  One minute in milliseconds
      */
     private static final int ONE_MINUTE = 60000;
 
@@ -110,14 +110,14 @@ public class JFuguePlayer {
     }
 
     /**
-     * @return ArrayList<Note> the structure of notes
+     * @return  the structure of notes
      */
     public ArrayList<Note> getNotes() {
         return this.notesToBePlayed;
     }
 
     /**
-     * @return ArrayList<Integer> the structure of notes
+     * @return  the structure of notes
      */
     public ArrayList<Integer> getInstruments() {
         return this.instrumentsToBePlayed;
