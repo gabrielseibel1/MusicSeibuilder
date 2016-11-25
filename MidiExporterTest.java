@@ -6,6 +6,11 @@ import static org.junit.Assert.*;
  * Created by Arthu on 24/11/2016.
  */
 public class MidiExporterTest {
+
+    /**
+     * Asserts pattern is set correctly
+     * @throws Exception when pattern is set incorrectly
+     */
     @Test
     public void configurePattern() throws Exception {
         String text = "AB!A D?CoA\nE;F,G";
