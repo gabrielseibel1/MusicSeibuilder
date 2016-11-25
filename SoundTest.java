@@ -15,6 +15,7 @@ public class SoundTest {
     public void resetOctaveTest() throws Exception {
         Sound sound = new Sound();
         assertEquals(5, sound.getOctave());
+
         sound.incOctave();
         sound.resetOctave();
         assertEquals(5, sound.getOctave());
@@ -28,6 +29,7 @@ public class SoundTest {
     private void incOctaveTest() throws Exception{
         Sound sound = new Sound();
         assertEquals(5, sound.getOctave());
+
         for (int i = 0; i < 5; i++)
             sound.incOctave();
         assertEquals(9, sound.getOctave());
@@ -41,6 +43,7 @@ public class SoundTest {
     private void decOctaveTest() throws Exception{
         Sound sound = new Sound();
         assertEquals(5, sound.getOctave());
+
         for (int i = 0; i < 6; i++){
             sound.decOctave();
         }
@@ -56,10 +59,12 @@ public class SoundTest {
     public void volumeTest() throws Exception {
         Sound sound = new Sound();
         assertEquals(50, sound.getVolume());
+
         //make volume possibly equals 150 (above the maximum 100)
         sound.doubleVolume();
         sound.doubleVolume();
         assertEquals(100, sound.getVolume());
+
         for (int i = 0; i < 7 ; i++)
             sound.halveVolume();
         assertEquals(0, sound.getVolume());
@@ -74,6 +79,7 @@ public class SoundTest {
         Sound sound = new Sound();
         sound.setNote('A');
         assertEquals('A',sound.getNote());
+
         sound.silence();
         assertEquals('R',sound.getNote());
     }
