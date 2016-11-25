@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Graphical user interface
  */
-public class GUI {
+public class GUI extends TextFileManager {
     /**
      * @var Jpanel the main panel of the UI
      */
