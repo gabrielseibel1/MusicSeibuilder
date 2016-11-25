@@ -57,10 +57,15 @@ public class Sound {
     }
 
     public void setOctave(int octave) {
-        if(octave > 0)
+        if(octave >= 0)
             this.octave = octave;
         else
-            this.octave = 1;
+            this.octave = 0;
+
+        if(octave <= 9)
+            this.octave = octave;
+        else
+            this.octave = 9;
     }
 
     public int getVolume() {
@@ -79,11 +84,11 @@ public class Sound {
             this.volume = 0;
     }
 
-
+    @Deprecated
     public void decBpm(){
         this.setBpm(this.getBpm()-50); //decreases bpm in 50
     }
-
+    @Deprecated
     public void incBpm(){
         this.setBpm(this.getBpm()+50); //increases bpm in 50
     }
@@ -93,11 +98,13 @@ public class Sound {
     }
 
     public void incOctave(){
-        this.setOctave(this.getOctave()+1);
+        if(this.getOctave() < 9)
+            this.setOctave(this.getOctave()+1);
     }
 
     public void decOctave(){
-        this.setOctave(this.getOctave()-1);
+        if(this.getOctave() > 0)
+            this.setOctave(this.getOctave()-1);
     }
 
     public void doubleVolume(){
@@ -105,7 +112,8 @@ public class Sound {
     }
 
     public void halveVolume(){
-        this.setVolume(this.getVolume()/2);
+        if(this.getVolume() > 0)
+            this.setVolume(this.getVolume()/2);
     }
 
     public void silence(){
