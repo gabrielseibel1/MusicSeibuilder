@@ -14,12 +14,12 @@ public class MidiExporter {
 
 
     /**
-     * @var MusicStructure the structure of the song to be saved as .mid (MIDI)
+     * MusicStructure of the song to be saved as .mid (MIDI)
      */
     private MusicStructure musicToBeExported;
 
     /**
-     * @var Pattern Jfugue uses a Pattern type to export a song to .mid (MIDI)
+     * Jfugue uses a Pattern type to export a song to .mid (MIDI)
      */
     private Pattern patternToExport;
 
