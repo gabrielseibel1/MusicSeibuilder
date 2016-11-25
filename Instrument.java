@@ -1,4 +1,6 @@
-
+/**
+ * Abstracts an instrument.
+ */
 public final class Instrument {
 
     /**
@@ -9,8 +11,15 @@ public final class Instrument {
     public static final int PAN_FLUTE = 76;
     public static final int CHURCH_ORGAN = 20;
 
+    /**
+     * Stores MIDI values associated to the instrument
+     */
     private int midiValue;
 
+    /**
+     * Constructs abstract instrument defined by MIDI value.
+     * @param midiValue indicates midi value associated to the new instrument
+     */
     public Instrument(int midiValue){
         this.setMidiValue(midiValue);
     }

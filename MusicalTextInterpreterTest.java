@@ -6,8 +6,12 @@ import static org.junit.Assert.*;
 
 
 public class MusicalTextInterpreterTest {
+
+    /**
+     * Tests basic string to be interpreted by MusicalTextInterpreter
+     */
     @Test
-    public void interpret() throws Exception {
+    public void interpretBasics() {
         String text = "Aab A!BoC?D\nE;F,G";
         MusicalTextInterpreter mi = new MusicalTextInterpreter(text);
         MusicStructure music = mi.interpret();
@@ -89,5 +93,50 @@ public class MusicalTextInterpreterTest {
         assertEquals(Instrument.CHURCH_ORGAN, sound.getInstrument().getMidiValue());
         assertEquals(6 ,sound.getOctave());
         assertEquals(100, sound.getVolume());
+    }
+
+    /**
+     * Test more sensitive cases from the specification.
+     */
+    @Test
+    public void interpretExtremes(){
+
+        // Since two spaces doesn't define any note, list of sounds should be empty.
+        String text = "  ";
+        MusicalTextInterpreter mi = new MusicalTextInterpreter(text);
+        MusicStructure music = mi.interpret();
+        LinkedList<Sound> sounds = music.getSounds();
+        assertEquals(true, sounds.isEmpty());
+
+        // Increases the volume 10% three times. For the default value is 50, the new value must be 66. There must be only one note: A.
+        mi.setText("iuOA");
+        mi.resetInterpretation();
+        music = mi.interpret();
+        sounds = music.getSounds();
+        assertEquals(1, sounds.size());
+        assertEquals('A', sounds.get(0).getNote());
+        assertEquals(66, sounds.get(0).getVolume());
+
+        // Digits increase midi value of the instrument according to their own values. There must be only one note: B.
+        mi.setText("123456789B");
+        mi.resetInterpretation();
+        music = mi.interpret();
+        sounds = music.getSounds();
+        assertEquals(1, sounds.size());
+        assertEquals('B', sounds.get(0).getNote());
+        assertEquals(Instrument.PAN_FLUTE + 45, sounds.get(0).getInstrument().getMidiValue());
+
+        //Increases octave three times, reaching 8, and then 3 more times. Since 9 is the default maximum octave, the end value must be 6.
+        mi.setText("???B");
+        mi.resetInterpretation();
+        music = mi.interpret();
+        sounds = music.getSounds();
+        assertEquals('B', sounds.get(0).getNote());
+        assertEquals(8, sounds.get(0).getOctave());
+        mi.setText("???B");
+        music = mi.interpret();
+        sounds = music.getSounds();
+        assertEquals('B', sounds.get(1).getNote());
+        assertEquals(6, sounds.get(1).getOctave());
     }
 }

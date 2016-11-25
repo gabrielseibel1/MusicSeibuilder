@@ -8,7 +8,7 @@ import org.jfugue.midi.MidiFileManager;
 import java.io.File;
 
 /**
- * Class that works on exporting music to a .mid (MIDI) file
+ * Class that works on exporting music structure to a .mid (MIDI) file
  */
 public class MidiExporter {
 

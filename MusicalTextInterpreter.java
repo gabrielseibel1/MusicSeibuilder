@@ -8,12 +8,20 @@ public class MusicalTextInterpreter {
      */
     private static final int maxOctave = 9;
 
+    /**
+     * Stores default octave
+     */
+    private int defaultOctave = 5;
+
+    /**
+     * Stores default volume
+     */
+    private int defaultVolume = 50;
 
     /**
      * String where input text to be interpreted is stored.
      */
     private String text;
-
 
     /**
      * Musical structure containing result from input text interpretation
@@ -23,13 +31,13 @@ public class MusicalTextInterpreter {
     /**
      * Current octave read from text.
      */
-    private int currentOctave = 5;
+    private int currentOctave = defaultOctave;
 
 
     /**
      * Current volume read from text.
      */
-    private int currentVolume = 50;
+    private int currentVolume = defaultVolume;
 
 
     /**
@@ -68,7 +76,7 @@ public class MusicalTextInterpreter {
     }
 
     /**
-     * Class describing char functionality.
+     * Class describing char functionality. Each char has a determined function that is given by the project specification.
      */
     private class InterpretedChar {
 
@@ -112,8 +120,9 @@ public class MusicalTextInterpreter {
                 musicStructure.addSound(newSound);
 
             }else if(isTechnicalChange(inputChar)){
-                if(isOctaveChange(inputChar) && getCurrentOctave() < maxOctave){
-                    setCurrentOctave(getCurrentOctave()+1);
+                if(isOctaveChange(inputChar)){
+                    if(getCurrentOctave() < maxOctave) setCurrentOctave(getCurrentOctave()+1);
+                    else setCurrentOctave(defaultOctave);
                 }else if(isVolumeChange(inputChar)){
                     int currentVolume = getCurrentVolume();
                     if(inputChar == ' ') setCurrentVolume(2*currentVolume);
@@ -216,6 +225,16 @@ public class MusicalTextInterpreter {
         void setLastChar(char lastChar) {
             this.lastChar = lastChar;
         }
+    }
+
+    /**
+     * Resets current interpretation to default values.
+     */
+    public void resetInterpretation(){
+        this.interpretedMusic = new MusicStructure();
+        setCurrentInstrument(new Instrument(Instrument.PAN_FLUTE));
+        setCurrentVolume(defaultVolume);
+        setCurrentOctave(defaultOctave);
     }
 
     private int getCurrentOctave() {
