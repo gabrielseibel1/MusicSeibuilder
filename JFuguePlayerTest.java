@@ -8,6 +8,11 @@ import static org.junit.Assert.*;
  * Created by Arthu on 24/11/2016.
  */
 public class JFuguePlayerTest {
+
+    /**
+     * Asserts notes are configutred correctly
+     * @throws Exception when one note is setup incorrectly
+     */
     @Test
     public void configureNotes() throws Exception {
         String text = "AB!A D?CoA\nE;F,G";
