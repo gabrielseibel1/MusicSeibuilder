@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 /**
  * Interprets input text.
  */
@@ -135,17 +137,21 @@ public class MusicalTextInterpreter {
                     else if(isNumber(inputChar)){
                         int midiInstrumentDiff = Integer.valueOf(Character.toString(inputChar));
                         Instrument newInstrument = new Instrument(getCurrentInstrument().getMidiValue() + midiInstrumentDiff);
-                        setCurrentInstrument(newInstrument); // instrument should be number
+                        setCurrentInstrument(newInstrument);
                     }
                 }
             }else{
-                if(isPureNote(lastChar)){
-                    Sound repeatedSound = musicStructure.getLastSound();
-                    musicStructure.addSound(repeatedSound);
-                }else{
-                    Sound pause = new Sound(musicStructure.getLastSound());
-                    pause.setNote('R');
-                    musicStructure.addSound(pause);
+                try{
+                    if(isPureNote(lastChar)){
+                        Sound repeatedSound = musicStructure.getLastSound();
+                        musicStructure.addSound(repeatedSound);
+                    }else{
+                        Sound pause = new Sound(musicStructure.getLastSound());
+                        pause.setNote('R');
+                        musicStructure.addSound(pause);
+                    }
+                } catch (NoSuchElementException e){
+                    // Nothing to do.
                 }
             }
         }
