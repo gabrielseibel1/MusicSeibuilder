@@ -22,7 +22,9 @@ public class TextFileManager {
                 fileText.add(line);
             }
             reader.close();
-            return fileText.toString();
+            String text = fileText.toString();
+            return text.substring(1, text.length()-1);
+
         }
         catch (Exception e) {
             e.printStackTrace();
